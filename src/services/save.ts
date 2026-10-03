@@ -1,0 +1,5 @@
+import { GAME, type ClassroomId, type Direction, type Gender, type StudentSave } from '../constants/game';
+export function newStudent(name:string,gender:Gender,room:ClassroomId):StudentSave{return{version:3,name,gender,room,x:408,y:520,direction:'up',xp:0,level:1,firstVisit:true};}
+export function loadStudent():StudentSave|null{try{const raw=localStorage.getItem(GAME.saveKey);if(!raw)return null;const p=JSON.parse(raw) as Partial<StudentSave>;if(p.version!==3||typeof p.name!=='string'||!p.room||!p.gender)return null;return{version:3,name:p.name,gender:p.gender,room:p.room,x:typeof p.x==='number'?p.x:408,y:typeof p.y==='number'?p.y:520,direction:(p.direction as Direction)||'up',xp:typeof p.xp==='number'?p.xp:0,level:typeof p.level==='number'?p.level:1,firstVisit:Boolean(p.firstVisit)};}catch{return null;}}
+export function saveStudent(save:StudentSave):void{localStorage.setItem(GAME.saveKey,JSON.stringify(save));}
+export function clearStudentSave():void{localStorage.removeItem(GAME.saveKey);}
