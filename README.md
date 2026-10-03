@@ -104,3 +104,6 @@ Your game can be uploaded to your server, [itch.io](https://itch.io/), etc.
 ## License
 
 [MIT](LICENSE)
+
+
+<!-- School Time 2D runtime is published from the verified Vite build. -->
