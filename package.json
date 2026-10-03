@@ -4,15 +4,15 @@
   "description": "A template for building Phaser RPG games.",
   "author": "Mark <mark@remarkablemark.org>",
   "scripts": {
-    "build": "npm run clean && vite build",
+    "build": "npm run clean && node ./node_modules/vite/bin/vite.js build",
     "bundle": "bash scripts/bundle.sh",
     "clean": "rm -rf dist",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "lint:tsc": "tsc --noEmit",
+    "lint:tsc": "node ./node_modules/typescript/bin/tsc --noEmit",
     "prepare": "husky",
-    "preview": "vite preview",
-    "start": "vite --open"
+    "preview": "node ./node_modules/vite/bin/vite.js preview",
+    "start": "node ./node_modules/vite/bin/vite.js --open"
   },
   "homepage": "https://remarkablegames.org/phaser-rpg/",
   "dependencies": {
