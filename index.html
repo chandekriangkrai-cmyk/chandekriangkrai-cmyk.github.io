@@ -1,4 +1,34 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#15223a"><meta name="description" content="School Time — English Adventure"><title>School Time — English Adventure</title></head><body>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#15223a"><meta name="description" content="School Time — English Adventure"><title>School Time — 2D English Adventure</title>
+<script>
+(() => {
+  // Remove legacy browser caches/service workers from older builds on this origin.
+  // School Time is exclusively the current Phaser 2D application.
+  const cleanupLegacyRuntime = async () => {
+    try {
+      let changed = false;
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (const registration of registrations) {
+          changed = (await registration.unregister()) || changed;
+        }
+      }
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        for (const key of keys) {
+          changed = (await caches.delete(key)) || changed;
+        }
+      }
+      if (changed && !sessionStorage.getItem('school-time-runtime-cleaned')) {
+        sessionStorage.setItem('school-time-runtime-cleaned', '1');
+        location.reload();
+      }
+    } catch {
+      // Cache cleanup must never block the game from starting.
+    }
+  };
+  cleanupLegacyRuntime();
+})();
+</script></head><body>
 <div id="game"></div><div id="player-hud"></div><button id="tablet-btn" class="top-btn">📱 TABLET</button><button id="menu-btn" class="top-btn second">START</button><div id="interaction-prompt"></div>
 <div id="name-overlay" class="overlay"><label for="student-name">ชื่อตัวละคร</label><input id="student-name" maxlength="20" autocomplete="nickname" placeholder="พิมพ์ชื่อของคุณ"></div>
 <div id="dialogue" class="dialogue"><div class="dialogue-name" id="dialogue-name"></div><div class="dialogue-text" id="dialogue-text"></div><button id="dialogue-next">A / แตะเพื่อดำเนินต่อ</button></div>
