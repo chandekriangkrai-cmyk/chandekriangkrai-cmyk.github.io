@@ -12,6 +12,10 @@ export default defineConfig([
   includeIgnoreFile(gitignorePath),
 
   {
+    ignores: ['assets/**/*.js', 'dist/**'],
+  },
+
+  {
     files: ['**/*.{cjs,cts,js,jsx,mjs,mts,ts,tsx}'],
 
     plugins: {
