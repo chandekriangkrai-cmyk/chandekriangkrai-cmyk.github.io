@@ -24,7 +24,12 @@ jobs:
         run: npm ci --prefer-offline
 
       - name: Lint commit message
-        run: npx commitlint --from=HEAD~1
+        run: |
+          if [ "$(git rev-list --count HEAD)" -gt 1 ]; then
+            npx commitlint --from=HEAD~1
+          else
+            echo "Skipping commitlint: repository has a single commit."
+          fi
 
       - name: Run ESLint
         run: npm run lint
